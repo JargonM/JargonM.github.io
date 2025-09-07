@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jarron's Portfolio</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="scripts/scripts.js"></script>
 </head>
 <body>
-    <h1>Jarron's Portfolio</h1>
+    <h1 id="headerId">Jarron's Portfolio</h1>
 
     <img src="Images/selfie.jpg" alt="Picture of Jarron Messerly">
 
@@ -19,11 +21,18 @@
     
     </p>
 
-    <h3> Future JavaScript Projects</h3>
+    <h3 id="headerId"> Future JavaScript Projects</h3>
     <p> 
         This is where I will be putting future JavaScript projects! so look forward to that.
     </p>
-    
+
+    <h3>Settings</h3>
+    <p>Current Setting: <span id="mode">Default</span>   </p>
+    <button onclick = "darkMode()">Dark Mode</button>
+    <button onclick = "lightMode()">Light Mode</button>
+    <button onclick = "defaultMode()">Default Mode</button>
+
+
     
 </body>
 </html>
