@@ -1,6 +1,7 @@
 /*Element selectors*/
 body{
     background-color: #d3f2fa;
+    
 }
 
 #headerId{
@@ -9,6 +10,10 @@ body{
 }
 
 
+
+p{
+      width: 1000px; 
+}
 
 
 
