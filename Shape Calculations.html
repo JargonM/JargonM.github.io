@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shape Calculations</title>
+    
+</head>
+<body>
+    <h1>Shape Calculations</h1>
+    <p>Please Enter the Dimensions of a rectangle/rectangular prism</p>
+    <img src="../Images/dimensions.png" alt="dimensions">
+    <p><label for='length'>length: </label><input type ="text" id="length"></p>
+    <p><label for='width'>Width: </label><input type ="text" id="width"></p>
+    <p><label for='height'>Height: </label><input type ="text" id="height"></p>
+    <button onclick="clacArea()" id="calArea">Calculate Area</button>
+    <button onclick="calcPerimeter()" id="calPerimeter">Calculate Perimeter</button>
+    <button onclick="calcVolume()" id="calVolume">Calculate Volume</button>
+    <p>Area: <span id="area"> </span>   </p>
+    <p>Perimeter: <span id="perimeter"> </span>   </p>
+    <p>Volume: <span id="volume"> </span>   </p>
+
+    <script>
+        function clacArea(){
+            let length = document.getElementById("length").value;
+            let width = document.getElementById("width").value;
+            let area = length * width;
+            document.getElementById("area").innerHTML = area;
+        }
+
+        function calcPerimeter(){
+            let length = document.getElementById("length").value;
+            let width = document.getElementById("width").value;
+            let perimeter = 2 * (parseFloat(length) + parseFloat(width));
+            document.getElementById("perimeter").innerHTML = perimeter;
+        }
+
+        function calcVolume(){
+            let length = document.getElementById("length").value;
+            let width = document.getElementById("width").value;
+            let height = document.getElementById("height").value;
+            let volume = length * width * height;
+            document.getElementById("volume").innerHTML = volume;
+            
+        }
+    </script>
+    
+</body>
+</html>
