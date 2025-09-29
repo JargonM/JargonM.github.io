@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mean Calculator</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+
+    <script>
+        let numbers = [];
+
+        function addTo(){
+            //validate if input is a number
+            let input = parseFloat(document.getElementById('value').value);
+
+            //error message if not a number
+            if(isNaN(input)){
+                alert("Please enter a valid number");
+                return;
+            }
+
+            //add value to array
+            numbers.push(input);
+            //display current values
+            document.getElementById('currentValues').innerText = numbers.join(', ');
+
+            //console.log(numbers);
+            value.value = '';//clear input field
+        }
+
+
+
+
+
+
+        function remove(){
+            //validate if input is a number
+            let input = parseFloat(document.getElementById('value').value);
+
+            //error message if not a number
+             if(isNaN(input)){
+                alert("Please enter a valid number");
+                
+            }
+
+            let inArray = numbers.includes(input);
+
+            //remove value from array if it exists
+            if(inArray == true)
+            {
+                let index = numbers.indexOf(input);
+                numbers.splice(index, 1);
+            }
+            //error message if value not found
+            else
+            {
+                alert("Value not found in dataset");
+                
+            }
+           //delete displayed values
+            document.getElementById('currentValues').innerText = numbers.join(', ');
+            //console.log(numbers);
+            value.value = ''; //clear input field
+
+        }
+
+
+
+        
+
+
+
+
+        function calculateMean(){
+            if(numbers.length === 0){
+                alert("No values in dataset");
+                
+            }
+            //loop through array and sum values
+            let sum = 0;
+            for(let i = 0; i < numbers.length; i++){
+                sum += numbers[i];
+            }
+
+            //calculate mean
+            let mean = sum / numbers.length;
+            return mean;
+        }
+
+    </script>
+
+    <h1>Data Entry</h1>
+    <p><label for='value: '>Enter A Value: </label><input type ="text" id="value">
+    <button onclick = "addTo()" id="addTo">Add Value</button>
+    <button onclick = "remove()" id="remove">Remove Value</button></p>
+    <h2>Current Dataset</h2>
+    <p id="currentValues"></p>
+    <h2>Current Mean</h2>
+    <button onclick="document.getElementById('meanValue').innerHTML = calculateMean()">Calculate Mean</button>
+    <p id="meanValue">Mean: </p> 
+    <p>Back to Home Page: <a href='index.html' > Home Page</a></p>
+
+
+
+
+</body>
+</html>
