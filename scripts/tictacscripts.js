@@ -48,7 +48,11 @@ function checkWin(){
     let c1 = document.getElementById("c1").innerHTML;
     let c2 = document.getElementById("c2").innerHTML;
     let c3 = document.getElementById("c3").innerHTML;
+    
+    
     //check rows
+
+
     //top row
     if(a1 == b1 && b1 == c1 && a1 == "X"){
         document.getElementById('outcome').innerHTML = "X Wins!";
