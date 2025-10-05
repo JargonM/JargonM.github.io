@@ -18,6 +18,10 @@
             width: 55px;
             height: 55px;
         }
+        #winText{
+            font-size: xx-large;
+            font-weight: bold;
+        }
 
 
 
@@ -105,7 +109,9 @@ for(let tile of tiles){
     }
 }    
   if(win){
-    alert('YOU WIN!');
+    //diplay win text
+    document.getElementById('winText').innerText = 'YOU WIN!';
+
   } 
 
 } 
@@ -168,11 +174,12 @@ const process = (row, col) => {
         const gameReset = () =>{
             loadMap(4,4);
             makeBoard(4,4);
+            document.getElementById('winText').innerText = '';
         }
 
     </script>
-
-
+    
+    <p id="winText"></p>
         <p>Back to Home Page: <a href='index.html' > Home Page</a></p>
 
     
