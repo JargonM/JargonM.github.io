@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOM Puzzle</title>
+    <style>
+        #puzzle{
+            width: 500px;
+            height: 500px;
+            border: 5px solid black;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="puzzle"></div>
+
+    <script>
+        //add 4 buttons and add to puzzle div
+        let button1 = document.createElement('button');
+        button1.textContent = 'A';
+        document.getElementById('puzzle').appendChild(button1);
+        button1.classList.add('puzzleButton1');
+
+        let button2 = document.createElement('button');
+        button2.textContent = 'B';
+        document.getElementById('puzzle').appendChild(button2);
+        button2.classList.add('puzzleButton2');
+
+        let button3 = document.createElement('button');
+        button3.textContent = 'C';
+        document.getElementById('puzzle').appendChild(button3);
+        button3.classList.add('puzzleButton3');
+
+        let button4 = document.createElement('button');
+        button4.textContent = 'D';
+        document.getElementById('puzzle').appendChild(button4);
+        button4.classList.add('puzzleButton4');
+
+        //add an <h1> element with the text "DOM Puzzle" above the puzzle div
+        const heading = document.createElement('h1');
+        heading.textContent = 'DOM Puzzle';
+        document.body.insertBefore(heading, document.getElementById('puzzle'));
+
+      //change highlight border color on mouse enter and leave
+        const box = document.getElementById('puzzle');
+        box.addEventListener('mouseenter', () => {
+            box.style.borderColor = 'orange';
+        });
+        box.addEventListener('mouseleave', () => {
+            box.style.borderColor = 'black';
+        });
+
+        let description = document.createElement('p');
+        description.textContent = 'This is a puzzle created entirely with JavaScript';
+        document.body.insertBefore(description, document.getElementById('homePage'));
+        
+
+
+    //set up buttons using dom javascript
+    function startup(){
+    const table = document.createElement('table');
+    document.getElementById('puzzle').appendChild(table)
+
+    for(let row = 0; row < 10; row++){
+        const tr = document.createElement('tr');
+        for(let col = 0; col < 10; col++){
+            const td = document.createElement('td');
+            td.setAttribute('onclick', 'changeLights(this)');
+            tr.appendChild(td);
+            //tr.style.backgroundColor = '#c39cfe';
+        }
+        puzzle.appendChild(tr);
+    }
+  
+    
+}
+
+    //function to change lights
+    function changeLights(element){
+        const lights = [];
+        //lights.push(element);
+        lights.push(element.previousElementSibling);
+        lights.push(element.nextElementSibling);
+
+     
+        lights.forEach((item) => {
+            if(item != null){
+                item.classList.toggle('lighted');
+                
+            }
+        });
+       element.classList.toggle('current');
+        
+    }
+
+    
+    //edit color of lighted class
+    const style = document.createElement('style');
+    style.innerHTML = 
+    `
+        .lighted {
+            background-color: #FF9E00;
+        }
+        .current {
+            background-color: #4A2574;
+        }
+        td{
+            position: relative;
+            top: 125px;
+            left: 250px;
+            border: 1px solid black;
+            width: 21px;
+            height: 21px;
+            background-color: #c39cfe;
+
+        }
+        div{
+            background-color: #7338A0;
+        }
+        .puzzleButton1{
+            width: 125px;
+            height: 125px;
+            background-color: #9455F4;
+            color: white;
+        }.puzzleButton2{
+            width: 125px;
+            height: 125px;
+            background-color: #4A2B74;
+            color: white;
+        }.puzzleButton3{
+            width: 125px;
+            height: 125px;
+            background-color: #594492;
+            color: white;
+        }.puzzleButton4{
+            width: 125px;
+            height: 125px;
+            background-color: #854DDC;
+            color: white;
+        }
+        .puzzleButton3{
+            width: 125px;
+            height: 125px;
+            position: relative;
+            top: 125px;
+            left: -250px;
+        }
+        .puzzleButton4{
+            width: 125px;
+            height: 125px;
+            position: relative;
+            top: 125px;
+            left: -250px;
+        }
+
+        body{
+            background-color: #d3f2fa;
+    
+        }
+    `;
+    document.head.appendChild(style);
+
+    
+
+    
+    startup();
+    </script>
+    
+        <p id="homePage">Back to Home Page: <a href='index.html' > Home Page</a></p>
+
+</body>
+</html>
