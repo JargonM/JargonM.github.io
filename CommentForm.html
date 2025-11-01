@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment Form</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    
+    <form id="signup" action="process.php" method="post"><!--Process does not actually exist-->
+        <label for="name">Name: </label>
+        <input id="name" type="text" name="name" pattern="[a-zA-Z ]*" title="Only letters and spaces"><br></br>
+
+         <label for="phonenumber">Phone Number: </label>
+        <input id="phonenumber" type="tel" name="phonenumber" placeholder="##########" pattern="[0-9]{10}" title="Only numbers"><br></br>
+
+         <label for="email">Email: </label>
+        <input id="email" type="email" name="email" autocomplete="email"><br></br>
+
+         <label for="Comment">Comments: </label><br></br>
+        <textarea id="Comment" name="Comment" rows="5" cols="50"></textarea><br></br>
+
+         <label for="username">UserName: </label>
+        <input id="username" type="text" name="username" pattern="[a-z]{1-15}"><br></br>
+
+         <label for="password">Password: </label>
+        <input id="password" type="text" name="password" minlength="8"><br></br>
+
+        <button onclick="sanitizeInput(event)" type="submit">Submit</button>
+    </form>
+        
+
+    <p id="usernameMessage"></p>
+    <p id="passwordMessage"></p>
+    <p id="homePage">Back to Home Page: <a href='index.html' > Home Page</a></p>
+
+    <script>
+        document.getElementById('signup').addEventListener('submit', function(event) {
+            let password = document.getElementById('password').value;
+            let username = document.getElementById('username').value;
+            if(password.includes(username)) {
+                alert('Password should not contain the username.');
+                event.preventDefault();
+            }else if(password.includes('password')) {
+                alert('Password should not contain the word "password".');
+                event.preventDefault();
+            }  
+        });
+
+        //only letters and underscores for username
+        document.getElementById('username').addEventListener("input", function(){
+            let username = document.getElementById('username').value;
+            let message = document.getElementById('usernameMessage');
+            const missing = [];
+            
+            if(/[0-9!@#$%^&*-=+./?]/.test(username)) {
+                missing.push("User Name must only contain letters and underscores.");
+            }
+            message.innerHTML =  missing.join(", ");
+        });
+
+        //at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character for password
+        document.getElementById('password').addEventListener("input", function(){
+            let password = document.getElementById('password').value;
+            let message = document.getElementById('passwordMessage');
+            const missing = [];
+            
+            if(password.length < 8) {
+                missing.push("at least 8 characters");
+            }
+            if(!/[A-Z]/.test(password)) {
+                missing.push("one uppercase letter");
+            }
+            if(!/[a-z]/.test(password)) {
+                missing.push("one lowercase letter");
+            }
+            if(!/[0-9]/.test(password)) {
+                missing.push("one number");
+            }
+            if(!/[!@#$%^&*()-+=]/.test(password)) {
+                missing.push("one special character");
+            }
+            
+            message.innerHTML = "Password is missing: " + missing.join(", ");
+            
+        });
+
+
+
+        //sanitize comments to prevent XSS
+        function escapeHtml(text) {
+            let map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&apos;'
+            };
+            return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+        }
+
+        function sanitizeInput() {
+            let commentField = document.getElementById('Comment');
+            commentField.value = escapeHtml(commentField.value);
+        }
+        
+    </script>
+    
+</body>
+</html>
+
