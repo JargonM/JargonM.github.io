@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body id="mainPage">
+    <h1>To Do List</h1>
+    <form id="todoForm">
+        <label for="task">Task: </label>
+        <input id="task" type="text" name="task" required><br></br>
+
+        <button type="submit">Add Task</button>
+    </form>
+
+    <h2>Your Tasks</h2> <p>(Click on a task to remove it)</p>
+    <ul id="taskList"></ul>
+    
+
+    <button id="color" onclick = "darkMode()">Dark Mode</button>
+    <button id="color" onclick = "lightMode()">Light Mode</button>
+    <button id="color" onclick = "defaultMode()">Default Mode</button>
+
+    <script>
+       
+       //add item to list
+       document.getElementById('todoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const taskInput = document.getElementById('task');
+            const taskList = document.getElementById('taskList');
+
+
+            const taskItem = document.createElement('li');
+            taskItem.textContent = taskInput.value;
+            taskList.appendChild(taskItem);
+
+            taskInput.value = '';
+            dueDateInput.value = '';
+        });
+
+        //remove item from list on click
+        document.getElementById('taskList').addEventListener('click', function(event) {
+            if(event.target && event.target.nodeName === "LI") {
+                event.target.remove();
+            }
+        });
+        
+        //store list as json in local storage
+        window.addEventListener('beforeunload', function() {
+            const taskList = document.getElementById('taskList');
+            const tasks = [];
+            taskList.querySelectorAll('li').forEach(function(item) {
+                tasks.push(item.textContent);
+            });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        });
+
+
+
+        //retrieve list from local storage on load
+        window.addEventListener('load', function() {
+            const tasks = JSON.parse(localStorage.getItem('tasks'));
+            if(tasks) {
+                const taskList = document.getElementById('taskList');
+                tasks.forEach(function(task) {
+                    const taskItem = document.createElement('li');
+                    taskItem.textContent = task;
+                    taskList.appendChild(taskItem);
+                });
+            }
+        });
+        
+        //dark mode function saved to local storage
+        function darkMode() {
+            document.body.style.backgroundColor = "black";
+            document.body.style.color = "white";
+            localStorage.setItem('mode', 'dark');
+        }
+        //light mode function saved to local storage
+        function lightMode() {
+            document.body.style.backgroundColor = "white";
+            document.body.style.color = "black";
+            localStorage.setItem('mode', 'light');
+        }
+        //default mode function saved to local storage
+        function defaultMode() {
+            document.body.style.backgroundColor = "#d3f2fa";
+            document.body.style.color = "black";
+            localStorage.setItem('mode', 'default');
+        }
+        //retrieve mode from local storage on load
+        window.addEventListener('load', function() {
+            const mode = localStorage.getItem('mode');
+            if(mode === 'dark') {
+                darkMode();
+            } else if(mode === 'light') {
+                lightMode();
+            } else {
+                defaultMode();
+            }
+        });
+
+        
+        
+   
+        //add count of tasks to session storage
+        window.addEventListener('beforeunload', function() {
+            const taskList = document.getElementById('taskList');
+            const taskCount = taskList.querySelectorAll('li').length;
+            sessionStorage.setItem('taskCount', taskCount);
+        });
+        //display task count from session storage
+        window.addEventListener('load', function() {
+            const taskCount = sessionStorage.getItem('taskCount');
+            if(taskCount) {
+                const header = document.querySelector('p');
+                const countDisplay = document.createElement('p');
+                countDisplay.textContent = `You have ${taskCount} tasks in your to-do list.`;
+                header.insertAdjacentElement('afterend', countDisplay);
+            }
+        });
+       
+     
+
+    </script>
+
+    <p>Back to Home Page: <a href='index.html' > Home Page</a></p>
+    
+</body>
+</html>
