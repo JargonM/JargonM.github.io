@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Collection Class</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <h1>Dark Souls Series</h1>
+   
+<script>
+    let GamesJson = [
+        {
+            title: "Dark Souls",
+            numBosses: 26,
+            releaseYear: 2011,
+            genre: "Action RPG",
+            platform: "Multi-platform",
+            path: 'Images/Dark_Souls_Cover_Art.jpg'
+        },
+        {
+            title: "Dark Souls 2",
+            numBosses: 41,
+            releaseYear: 2014,
+            genre: "Action RPG",
+            platform: "Multi-platform",
+            path: 'Images/Dark_Souls_II_cover.jpg'
+        },
+        {
+            title: "Dark Souls 3",
+            numBosses: 25,
+            releaseYear: 2016,
+            genre: "Action RPG",
+            platform: "Multi-platform",
+            path: 'Images/Dark_souls_3_cover_art.jpg'
+
+        }
+    ];
+   
+    class Games{
+        //attributes
+        title;
+        numBosses;
+        #releaseYear;
+        genre;
+        platform;
+        path;
+
+
+
+        //constructor
+        constructor(title, numBosses, releaseYear, genre, platform, path){
+            this.title = title;
+            this.numBosses = numBosses;
+            this.releaseYear = releaseYear;
+            this.genre = genre;
+            this.platform = platform;
+            this.path = path;
+        }
+
+
+
+        //methods
+        get releaseYear(){
+            return this.#releaseYear;
+        }
+        set releaseYear(releaseYear){
+            if(releaseYear < 1920 || releaseYear > new Date().getFullYear()){
+                console.error("Release year must be between 1920 and the current year.");
+            } else {
+                this.#releaseYear = releaseYear;
+            }
+        }
+
+        
+        displayInfo(){
+            const div = document.createElement('div');
+            div.innerHTML = `
+                <h2>${this.title}</h2>
+                <img src="${this.path}" alt="${this.title} Cover Art" width="100">
+                <p>Number of Bosses: ${this.numBosses}</p>
+                <p>Release Year: ${this.releaseYear}</p>
+                <p>Genre: ${this.genre}</p>
+                <p>Platform: ${this.platform}</p>
+                <hr>
+            `;
+            document.body.appendChild(div);
+        }
+
+
+        toString(){
+            return `Title: ${this.title}, Number of Bosses: ${this.numBosses}, Release Year: ${this.releaseYear}, Genre: ${this.genre}, Platform: ${this.platform}`;
+        }
+
+       
+
+
+    }
+
+    let Ds1 = new Games(GamesJson[0].title, GamesJson[0].numBosses, GamesJson[0].releaseYear, GamesJson[0].genre, GamesJson[0].platform, GamesJson[0].path);
+    let Ds2 = new Games(GamesJson[1].title, GamesJson[1].numBosses, GamesJson[1].releaseYear, GamesJson[1].genre, GamesJson[1].platform, GamesJson[1].path);
+    let Ds3 = new Games(GamesJson[2].title, GamesJson[2].numBosses, GamesJson[2].releaseYear, GamesJson[2].genre, GamesJson[2].platform, GamesJson[2].path);
+   
+    Ds1.displayInfo();
+    Ds2.displayInfo();
+    Ds3.displayInfo();
+</script>
+
+
+    <p>Back to Home Page: <a href='index.html' > Home Page</a></p>
+    
+</body>
+</html>
