@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whack-A-Mole</title>
+    
+    <style>
+        #gameBoard{
+            border: 5px solid black;
+            width: 315px;
+            height: 315px;
+            background-color: green;
+        }
+        td{
+            height: 100px;
+            width: 100px;
+            border-radius: 50px;
+            background-color: green;
+        }
+        button{
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome To Whack-A-Mole</h1>
+    <h2 id="score">Score: </h2>
+    
+<div id="gameBoard"></div>  
+<button onclick="runMoleLoop()">Start Game</button>
+
+
+<script>
+    //sets up the game board
+    function startup(){
+    const table = document.createElement('table');
+    document.getElementById('gameBoard').appendChild(table)
+
+    for(let row = 0; row < 3; row++){
+        const tr = document.createElement('tr');
+        for(let col = 0; col < 3; col++){
+            const td = document.createElement('td');
+            td.setAttribute('onclick', 'checkMole(this)');
+            tr.appendChild(td);
+            td.addEventListener('mouseenter', () => {
+            td.style.borderColor = 'orange';
+        });  
+        
+        
+            td.addEventListener('mouseleave', () => {
+            td.style.borderColor = 'black';
+        });
+        }
+        table.appendChild(tr);
+    }
+ 
+}
+
+
+//place mole randomly
+function placeMole(event){
+    let time = 900;             // starting delay
+    let decrease = 50;          // how much to speed up each round
+    let minTime = 150;          // fastest allowed speed
+    const cells = document.querySelectorAll('td');
+    const randomIndex = Math.floor(Math.random() * cells.length);
+    cells.forEach(cell => cell.textContent = ''); // Clear previous mole
+    cells[randomIndex].style.backgroundColor = 'brown'; // Place new mole
+    //console.log("Mole placed at index: " + randomIndex);
+    //delete after some time
+    setTimeout(() => {
+        cells[randomIndex].style.backgroundColor = 'green'; // Remove mole
+    }, time = Math.max(minTime, time - decrease));
+
+}
+
+//check if mole is clicked
+function checkMole(){
+    const cells = document.querySelectorAll('td');
+    var score = 0;
+    cells.forEach(cell => {
+        cell.addEventListener('click', () => {
+            if(cell.style.backgroundColor === 'brown'){
+                score++;
+                document.getElementById('score').textContent = 'Score: ' + score;
+                cell.style.backgroundColor = 'green'; // Remove mole after hit
+            }
+        });
+    });
+    
+
+}
+
+
+let time = 1500;            // starting delay
+let decrease = 50;          // how much to speed up each round
+let minTime = 200;          // fastest allowed speed
+
+function runMoleLoop() {
+    placeMole();
+    // gradually reduce the delay
+    time = Math.max(minTime, time - decrease);
+    setTimeout(runMoleLoop, time);
+}
+
+
+
+
+
+
+
+startup();
+</script>
+</body>
+</html>
