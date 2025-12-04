@@ -21,7 +21,23 @@
         button{
             margin-top: 20px;
             padding: 10px 20px;
-            font-size: 16px;
+            font-size: 16px;    
+            position: absolute;
+            top: 525px;
+            left: 50%;
+            transform: translateX(-50%);
+            
+
+        }
+        body{
+            text-align: center;
+            
+        }
+        div#gameBoard{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
@@ -31,6 +47,8 @@
 <h2 id="timer">Time: 120</h2>
 <div id="gameBoard"></div>
 <button onclick="startGame()">Start Game</button>
+<p id="homePage">Back to Home Page: <a href='index.html' > Home Page</a></p>
+
     
 <script>
 let time = 1500;
