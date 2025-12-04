@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Whack-A-Mole</title>
-    
-    <style>
-        #gameBoard{
-            border: 5px solid black;
-            width: 315px;
-            height: 315px;
-            background-color: green;
-        }
-        td{
-            height: 100px;
-            width: 100px;
-            border-radius: 50px;
-            background-color: green;
-        }
-        button{
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Whack-A-Mole</title>
+<style>
+#gameBoard{
+border: 5px solid black;
+width: 315px;
+height: 315px;
+background-color: green;
+}
+td{
+height: 100px;
+width: 100px;
+border-radius: 50px;
+background-color: green;
+}
+button{
+margin-top: 20px;
+padding: 10px 20px;
+font-size: 16px;
+}
+</style>
 </head>
 <body>
 <h1>Welcome To Whack-A-Mole</h1>
@@ -31,7 +30,8 @@
 <h2 id="timer">Time: 120</h2>
 <div id="gameBoard"></div>
 <button onclick="startGame()">Start Game</button>
-    
+
+
 <script>
 let time = 1500;
 let decrease = 10;
